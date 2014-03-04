@@ -1,0 +1,466 @@
+<GameObject
+	name="Mario"
+	initialState="1,2,3,7,8"
+	physics="dynamic">
+	
+	<Sprite animationSet="mario.anim" initialAnimName="IdleR"/>
+	
+	<Text text="Grounded = @@@Grounded more text" position="500,0"/>
+  <Text text="MoveLeft = @MoveLeft" position="500,15"/>
+  <Text text="MoveRight = @MoveRight" position="500,30"/>
+  <Text text="LastMoveDir = @LastMoveDir" position="500,45"/>
+  <Text text="IdleAnim = @IdleAnim" position="500,60"/>
+  <Text text="JumpAnim = @JumpAnim" position="500,75"/>
+  <Text text="WalkRAnim = @WalkR" position="500,90"/>
+  <Text text="WalkLAnim = @WalkL" position="500,105"/>
+  <Text text="PowerLevel = @PowerLevel" position="500,120"/>
+
+  <Text text="Mario @player test @player : @Score @@asdf" position="-8,-18" screenSpace="false"/>
+
+  <!-- @TODO move this to HUD object... -->
+  <Text text="Score: @Score" position="10,196"/>
+	<Sprite animationSet="coin.anim" screenSpace="true" position="0,200"/>
+	
+  
+	<Properties>
+		<Property name="CollisionCount" type="int" value="0"/>
+		<Property name="player" type="int" value="0"/>
+		<Property name="Score" type="int" value="0"/>
+		<Property name="Grounded" type="int" value="0"/>
+    <Property name="MoveRight" type="int" value="0"/>
+    <Property name="MoveLeft" type="int" value="0"/>
+    <Property name="LastMoveDir" type="int" value="0"/>
+
+    <Property name="IdleAnim" type="string" value="@IdleR"/>
+    <Property name="JumpAnim" type="string" value="@JumpR"/>
+
+    <Property name="IdleR" type="string" value="IdleR"/>
+    <Property name="IdleL" type="string" value="IdleL"/>
+    <Property name="JumpR" type="string" value="JumpR"/>
+    <Property name="JumpL" type="string" value="JumpL"/>
+    <Property name="WalkR" type="string" value="WalkR"/>
+    <Property name="WalkL" type="string" value="WalkL"/>
+
+    <Property name="PowerLevel" type="int" value="0"/>
+  </Properties>
+
+
+  <!--
+  States:
+    1: Damagable
+    2: Idle
+    3: Initialize
+    4: Death
+    5: Jump
+    6: Fall
+    7: Ground Dectection
+    8: User Controller
+    9: End of level
+  -->
+  
+  
+  
+  <!-- State Actions -->
+
+  <Action name="RemoveStateIdle" type="State" operation="Subtract" state="2"/>
+  <Action name="RemoveStateFall" type="State" operation="Subtract" state="6"/>
+  <Action name="RemoveStateJump" type="State" operation="Subtract" state="5"/>
+  <Action name="RemoveStateInit" type="State" operation="Subtract" state="3"/>
+  <Action name="RemoveStatePlayerControl" type ="State" operation="Subtract" state="8"/>
+
+  <Action name="AddStateIdle" type="State" operation="Add" state="2"/>
+  <Action name="AddStateFall" type="State" operation="Add" state="6"/>
+  <Action name="AddStateJump" type="State" operation="Add" state="5"/>
+  <Action name="AddStateEndOfLevel" type="State" operation="Add" state="9"/>
+
+  <Action name="SetStateDeath" type="State" operation="Set" state="4"/>
+
+  <!-- /State Actions -->
+  
+  
+  
+  <!-- Animations -->
+
+  <Action name ="PlayIdleAnim" type="Animation" animName="@IdleAnim"/>
+  <Action name ="PlayFallAnim" type="Animation" animName="@JumpAnim"/>
+  <Action name ="PlayJumpAnim" type="Animation" animName="@JumpAnim"/>
+  <Action name ="PlayMoveLeftAnim" type="Animation" animName="@WalkL"/>
+  <Action name ="PlayMoveRightAnim" type="Animation" animName="@WalkR"/>
+  <Action name ="PlayDeathAnim" type="Animation" animName="Death"/>
+
+  <!-- /Animations -->
+  
+  
+  
+  <!-- Sound -->
+  
+  <Action name="PlayJumpSFX" type="Sound" mode="PlayEnd" soundName="../data/sfx/smb_jump-small.wav"/>
+  <Action name="PlayDieSFX"  type="Sound" mode="PlayMusic" soundName="../data/music/08-you-re-dead.mp3"/>
+  
+  <!-- /Sound -->
+
+
+
+
+
+
+  <!-- Initialize -->
+
+  <Trigger name="Once" type="Always"/>
+
+  <Action name="LookAtMe" type="Camera" objectToLookAt="Mario"/>
+
+  <!-- TEST REMOVE ME -->
+  <Controller name="Init" state="3" type="Script" scriptName="script/say_my_name.py">
+    <AddTrigger name="Once"/>
+  </Controller>
+  
+  <Controller name="Init" state="3">
+    <AddTrigger name="Once"/>
+
+    <AddAction name="LookAtMe"/>
+    <AddAction name="RemoveStateInit"/>
+  </Controller>
+  
+  <!-- /Initialize -->
+  
+  
+  
+  
+  <!-- User Input -->
+
+  <Action name="MoveLeft" type="Motion" velocity="-14,0"/>
+  <Action name="MoveRight" type="Motion" velocity="14,0"/>
+
+  <Trigger name="WasLastMovingRight" type="Property" property="LastMoveDir" value="1" compareMode="Equal"/>
+  <Trigger name="WasLastMovingLeft" type="Property" property="LastMoveDir" value="0" compareMode="Equal"/>
+
+  <Action name="SetLastMoveRight" type="Property" propertyName="LastMoveDir" value="1" propertyManipulationMode="Assign"/>
+  <Action name="SetLastMoveLeft" type="Property" propertyName="LastMoveDir" value="0" propertyManipulationMode="Assign"/>
+  
+  <Trigger name="ShouldMoveRight" type="Property" repeatTrue="true" property="MoveRight" value="1" compareMode="Equal"/>
+  <Trigger name="ShouldMoveLeft" type="Property" repeatTrue="true" property="MoveLeft" value="1" compareMode="Equal"/>
+
+  <Action name="SetMoveRightTrue" type="Property" propertyName="MoveRight" value="1" propertyManipulationMode="Assign"/>
+  <Action name="SetMoveRightFalse" type="Property" propertyName="MoveRight" value="0" propertyManipulationMode="Assign"/>
+  <Action name="SetMoveLeftTrue" type="Property" propertyName="MoveLeft" value="1" propertyManipulationMode="Assign"/>
+  <Action name="SetMoveLeftFalse" type="Property" propertyName="MoveLeft" value="0" propertyManipulationMode="Assign"/>
+
+  <Trigger name="KeyJump"  type="Event" eventName="JumpHold"/>
+  <Trigger name="KeyLeft"  type="Event" eventName="MoveLeft"/>
+  <Trigger name="KeyRight" type="Event" eventName="MoveRight"/>
+  <Trigger name="KeyLeftUp"  type="Event" eventName="StopMoveLeft"/>
+  <Trigger name="KeyRightUp" type="Event" eventName="StopMoveRight"/>
+
+  <Action name="JumpForce" type="Motion" force="0,-450"/>
+
+  <Controller name="UserCont" state="8">
+    <AddTrigger name="KeyJump"/>
+    <AddTrigger name="IsOnGround"/>
+
+    <AddAction name="JumpForce"/>
+    <AddAction name="AddStateJump"/>
+    <AddAction name="RemoveStateIdle"/>
+  </Controller>
+
+  <Controller name="UserCont_MoveLeft" state="8">
+    <AddTrigger name="KeyLeft"/>
+    
+    <AddAction name="SetMoveLeftTrue"/>
+    <AddAction name="SetLastMoveLeft"/>
+  </Controller>
+
+  <Controller name="UserCont_StopMoveLeft" state="8">
+    <AddTrigger name="KeyLeftUp"/>
+
+    <AddAction name="SetMoveLeftFalse"/>
+  </Controller>
+  
+
+  <Controller name="UserCont_MoveRight" state="8">
+    <AddTrigger name="KeyRight"/>
+
+    <AddAction name="SetMoveRightTrue"/>
+    <AddAction name="SetLastMoveRight"/>
+  </Controller>
+  
+  <Controller name="UserCont_StopMoveRight" state="8">
+    <AddTrigger name="KeyRightUp"/>
+
+    <AddAction name="SetMoveRightFalse"/>
+  </Controller>
+  
+  <!-- Touch end of level trigger -->
+  <Trigger name="TouchEndOfLevel" type="Event" eventName="WalkToGoal"/>
+
+  <Controller name="GotoEndOfLevelCont" state="8">
+    <AddTrigger name="TouchEndOfLevel"/>
+
+    <AddAction name="AddStateEndOfLevel"/>
+    <AddAction name="RemoveStatePlayerControl"/>
+  </Controller>
+
+
+  <!-- Set anims from last movement direction -->
+  <Action name="SetIdleAnimToRight" type="Property" propertyName="IdleAnim" value="@IdleR" propertyManipulationMode="Assign"/>
+  <Action name="SetIdleAnimToLeft" type="Property" propertyName="IdleAnim" value="@IdleL" propertyManipulationMode="Assign"/>
+
+  <Action name="SetJumpAnimToRight" type="Property" propertyName="JumpAnim" value="@JumpR" propertyManipulationMode="Assign"/>
+  <Action name="SetJumpAnimToLeft" type="Property" propertyName="JumpAnim" value="@JumpL" propertyManipulationMode="Assign"/>
+
+  <Controller name="MoveDir1" state="8" type="Expression" expr="@LastMoveDir == 1">
+    <!--
+    <AddTrigger name="WasLastMovingRight"/>
+    -->
+    <AddTrigger name="Always"/>
+
+    <AddAction name="SetIdleAnimToRight"/>
+    <AddAction name="SetJumpAnimToRight"/>
+  </Controller>
+
+  <Controller name="MoveDir2" state="8">
+    <AddTrigger name="WasLastMovingLeft"/>
+
+    <AddAction name="SetIdleAnimToLeft"/>
+    <AddAction name="SetJumpAnimToLeft"/>
+  </Controller>
+
+  <!-- Power level -->
+  <Trigger name="PowerLevelOne" type="Property" property="PowerLevel" value="0" compareMode="Equal"/>
+  <Trigger name="PowerLevelTwo" type="Property" property="PowerLevel" value="1" compareMode="Equal"/>
+  
+  <Action name="SetIdleR_One" type="Property" propertyName="IdleR" value="IdleR" propertyManipulationMode="Assign"/>
+  <Action name="SetIdleL_One" type="Property" propertyName="IdleL" value="IdleL" propertyManipulationMode="Assign"/>
+  <Action name="SetJumpR_One" type="Property" propertyName="JumpR" value="JumpR" propertyManipulationMode="Assign"/>
+  <Action name="SetJumpL_One" type="Property" propertyName="JumpL" value="JumpL" propertyManipulationMode="Assign"/>
+  <Action name="SetWalkR_One" type="Property" propertyName="WalkR" value="WalkR" propertyManipulationMode="Assign"/>
+  <Action name="SetWalkL_One" type="Property" propertyName="WalkL" value="WalkL" propertyManipulationMode="Assign"/>
+
+  <Action name="SetIdleR_Two" type="Property" propertyName="IdleR" value="BigIdleR" propertyManipulationMode="Assign"/>
+  <Action name="SetIdleL_Two" type="Property" propertyName="IdleL" value="BigIdleL" propertyManipulationMode="Assign"/>
+  <Action name="SetJumpR_Two" type="Property" propertyName="JumpR" value="BigJumpR" propertyManipulationMode="Assign"/>
+  <Action name="SetJumpL_Two" type="Property" propertyName="JumpL" value="BigJumpL" propertyManipulationMode="Assign"/>
+  <Action name="SetWalkR_Two" type="Property" propertyName="WalkR" value="BigWalkR" propertyManipulationMode="Assign"/>
+  <Action name="SetWalkL_Two" type="Property" propertyName="WalkL" value="BigWalkL" propertyManipulationMode="Assign"/>
+  
+  <Controller name="PowerLevelOneCont" state="8">
+    <AddTrigger name="PowerLevelOne"/>
+
+    <AddAction name="SetIdleR_One"/>
+    <AddAction name="SetIdleL_One"/>
+    <AddAction name="SetJumpR_One"/>
+    <AddAction name="SetJumpL_One"/>
+    <AddAction name="SetWalkR_One"/>
+    <AddAction name="SetWalkL_One"/>
+  </Controller>
+
+  <Controller name="PowerLevelTwoCont" state="8">
+    <AddTrigger name="PowerLevelTwo"/>
+
+    <AddAction name="SetIdleR_Two"/>
+    <AddAction name="SetIdleL_Two"/>
+    <AddAction name="SetJumpR_Two"/>
+    <AddAction name="SetJumpL_Two"/>
+    <AddAction name="SetWalkR_Two"/>
+    <AddAction name="SetWalkL_Two"/>
+  </Controller>
+  
+  <!-- Touch killzone or die -->
+  <Trigger name="TouchKillzone" type="Collision" objectProperty="Killzone"/>
+  <Trigger name="IsDead" type="Property" property="PowerLevel" value="-1" compareMode="Equal"/>
+  <Action name="RestartLevel" type="RestartLevel"/>
+  <Action name="SuspendDynamics" type="Physics" mode="SuspendDynamics"/>
+
+  <Controller name="KilledCont" type="OR" state="8">
+    <AddTrigger name="TouchKillzone"/>
+    <AddTrigger name="IsDead"/>
+
+    <AddAction name="PlayDieSFX"/>
+    <AddAction name="PlayDeathAnim"/>
+    <AddAction name="SuspendDynamics"/>
+    <AddAction name="SetStateDeath"/>
+  </Controller>
+  
+  <!-- Get coin -->
+  <Trigger name="CoinGet" type="Event" eventName="CoinGet"/>
+  <Action name="AddScore" type="Property" propertyName="Score" value="1" propertyManipulationMode="Add"/>
+
+  <Controller name="CoinScoreCont" state="8">
+    <AddTrigger name="CoinGet"/>
+
+    <AddAction name="AddScore"/>
+  </Controller>
+  
+  <!-- /User Input -->
+
+  
+  
+  
+  <!-- Damagable State -->
+
+  <Trigger name="TouchHazard" type="Collision" objectProperty="Hazard"/>
+  <Action name="TakeDamage" type="Property" propertyName="PowerLevel" value="-1" propertyManipulationMode="Add"/>
+
+  <Controller name="DamageStateCont" state="1">
+    <AddTrigger name="TouchHazard"/>
+    <AddAction name="TakeDamage"/>
+  </Controller>
+
+  <!-- /Damagable State -->
+  
+  
+  
+  <!-- Ground Dectection State -->
+
+  <!-- Use these to check if mario is on the ground -->
+  <Trigger name="IsOnGround" type="Property" repeatTrue="true" property="Grounded" value="1" compareMode="Equal"/>
+  <Trigger name="IsNotOnGround" type="Property" property="Grounded" value="0" compareMode="Equal"/>
+  
+  <Trigger name="TouchGround" type="Collision" repeatTrue="true" objectProperty="Floor"/>
+  
+  <Action name="SetOnGroundTrue" type="Property" propertyName="Grounded" value="1" propertyManipulationMode="Assign"/>
+  <Action name="SetOnGroundFalse" type="Property" propertyName="Grounded" value="0" propertyManipulationMode="Assign"/>
+
+  <Controller name="GroundDetectCont" state="7">
+    <AddTrigger name="TouchGround"/>
+
+    <AddAction name="SetOnGroundTrue"/>
+  </Controller>
+
+  <Controller name="GroundDetectCont" type="NAND" state="7">
+    <AddTrigger name="TouchGround"/>
+
+    <AddAction name="SetOnGroundFalse"/>
+  </Controller>
+  
+  <!-- /Ground Dectection State -->
+
+
+
+  <!-- Idle State -->
+
+  <Trigger name="Always" type="Always" repeatTrue="true"/>
+
+  <!-- if not moving then play idle animation -->
+  <Controller name="IdleStateCont" type="NOR" state="2">
+    <AddTrigger name="ShouldMoveLeft"/>
+    <AddTrigger name="ShouldMoveRight"/>
+
+    <AddAction name="PlayIdleAnim"/>
+  </Controller>
+  
+  <Controller name="MoveLeftCont" state="2">
+    <AddTrigger name="ShouldMoveLeft"/>
+
+    <AddAction name="MoveLeft"/>
+    <AddAction name="PlayMoveLeftAnim"/>
+  </Controller>
+
+  <Controller name="MoveRightCont" state="2">
+    <AddTrigger name="ShouldMoveRight"/>
+
+    <AddAction name="MoveRight"/>
+    <AddAction name="PlayMoveRightAnim"/>
+  </Controller>
+
+  <!-- if not on ground then add state falling, remove state idle -->
+  <Controller name="IdleStateCont2" state="2">
+    <AddTrigger name="IsNotOnGround"/>
+
+    <AddAction name="AddStateFall"/>
+    <AddAction name="RemoveStateIdle"/>
+  </Controller>
+  
+  <!-- /Idle State -->
+
+
+
+  <!-- Fall State -->
+
+  <Controller name="FallStateCont" state="6">
+    <AddTrigger name="Always"/>
+
+    <AddAction name="PlayFallAnim"/>
+  </Controller>
+
+  <Controller name="FallStateCont2" state="6">
+    <AddTrigger name="IsOnGround"/>
+
+    <AddAction name="AddStateIdle"/>
+    <AddAction name="RemoveStateFall"/>
+  </Controller>
+
+  <Controller name="MoveLeftFallCont" state="6">
+    <AddTrigger name="ShouldMoveLeft"/>
+
+    <AddAction name="MoveLeft"/>
+  </Controller>
+
+  <Controller name="MoveRightFallCont" state="6">
+    <AddTrigger name="ShouldMoveRight"/>
+
+    <AddAction name="MoveRight"/>
+  </Controller>
+  
+  <!-- /Fall State -->
+
+
+
+  <!-- Jump State -->
+
+  <Controller name="JumpStateCont" state="5">
+    <AddTrigger name="Always"/>
+
+    <AddAction name="PlayJumpSFX"/>
+    <AddAction name="PlayJumpAnim"/>
+  </Controller>
+
+  <Controller name="JumpStateCont" state="5">
+    <AddTrigger name="IsOnGround"/>
+    
+    <AddAction name="RemoveStateJump"/>
+    <AddAction name="AddStateIdle"/>
+  </Controller>
+
+  <Controller name="MoveLeftJumpCont" state="5">
+    <AddTrigger name="ShouldMoveLeft"/>
+
+    <AddAction name="MoveLeft"/>
+  </Controller>
+
+  <Controller name="MoveRightJumpCont" state="5">
+    <AddTrigger name="ShouldMoveRight"/>
+
+    <AddAction name="MoveRight"/>
+  </Controller>
+  
+  <!-- /Jump State -->
+
+
+
+  <!-- End of level State -->
+
+  <Controller name="EndOfLevelCont" state="9">
+    <AddTrigger name="IsOnGround"/>
+    
+    <AddAction name="MoveRight"/>
+    <AddAction name="PlayMoveRightAnim"/>
+  </Controller>
+  
+  <!-- /End of level State -->
+  
+  
+  
+  <!-- Death -->
+
+  <Trigger name="DeathAnimComplete" type="Animation" mode="Complete" animName="Death"/>
+  
+  <Controller name="DeathCont" state="4">
+    <AddTrigger name="DeathAnimComplete"/>
+
+    <AddAction name="RestartLevel"/>
+  </Controller>
+  
+  <!-- /Death -->
+
+</GameObject>

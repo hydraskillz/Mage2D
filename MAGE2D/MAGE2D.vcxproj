@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugInline|Win32">
+      <Configuration>DebugInline</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7A5C6DD1-D49B-4CEB-81D3-78ECF8CEEA23}</ProjectGuid>
+    <RootNamespace>MAGE2D</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\MageMath_Properties.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\MageMath_Properties.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\MageMath_Properties.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\_Output\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
+    <OutDir>$(SolutionDir)\_Output\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>_Output\$(Configuration)\</IntDir>
+    <LibraryPath>../libs/Python33/libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>../libs/Python33/include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
+    <IntDir>$(SolutionDir)\_Output\$(Configuration)\</IntDir>
+    <LibraryPath>../libs/Python33/libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>../libs/Python33/include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\_Output\$(Configuration)\</OutDir>
+    <IntDir>_Output\$(Configuration)\</IntDir>
+    <LibraryPath>../libs/Python33/libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>../libs/Python33/include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../libs/SDL/include;../libs/SDL_image/include;../libs/SDL_gfx/include;../libs/SDL_mixer/include;../libs/SDL_ttf/include;../libs/zlib/include;../libs/Python33/include;tinyxml2;base64;minizip;%(AdditionalIncludeDirectories);../tinyxml2/;../base64/</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>MageLib.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../libs/SDL/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_image.lib;SDL_gfx.lib;SDL_ttf.lib;SDL_mixer.lib;zlibwapi.lib;python33.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>../libs/SDL/lib/x86;../libs/SDL_image/lib;../libs/SDL_gfx/lib;../libs/SDL_mixer/lib;../libs/SDL_ttf/lib;../libs/zlib/lib;../libs/Python33/libs</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../libs/SDL/include;../libs/SDL_image/include;../libs/SDL_gfx/include;../libs/SDL_mixer/include;../libs/SDL_ttf/include;../libs/zlib/include;../libs/Python33/include;tinyxml2;base64;minizip;%(AdditionalIncludeDirectories);../tinyxml2/;../base64/</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;ZLIB_WINAPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>MageLib.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../libs/SDL/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_image.lib;SDL_gfx.lib;SDL_ttf.lib;SDL_mixer.lib;zlibwapi.lib;python33.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>../libs/SDL/lib/x86;../libs/SDL_image/lib;../libs/SDL_gfx/lib;../libs/SDL_mixer/lib;../libs/SDL_ttf/lib;../libs/zlib/lib;../libs/Python33/libs</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../libs/SDL/include;../libs/SDL_image/include;../libs/SDL_gfx/include;../libs/SDL_mixer/include;../libs/SDL_ttf/include;../libs/zlib/include;../libs/Python33/include;tinyxml2;base64;minizip;%(AdditionalIncludeDirectories);../tinyxml2/;../base64/</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;ZLIB_WINAPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>MageLib.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../libs/SDL/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_image.lib;SDL_gfx.lib;SDL_ttf.lib;SDL_mixer.lib;zlibwapi.lib;python33.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../libs/SDL/lib/x86;../libs/SDL_image/lib;../libs/SDL_gfx/lib;../libs/SDL_mixer/lib;../libs/SDL_ttf/lib;../libs/zlib/lib;../libs/Python33/libs</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Assertion.cpp" />
+    <ClCompile Include="BitHacks.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="CommandArgs.cpp" />
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Console_Win32.cpp" />
+    <ClCompile Include="DebugIO.cpp" />
+    <ClCompile Include="DebugIO_Win32.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityDefinition.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="FileLoadJob.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="FileSystem_Win32.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FrameRateControl.cpp" />
+    <ClCompile Include="GameAction.cpp" />
+    <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="GameExpression.cpp" />
+    <ClCompile Include="GameInfo.cpp" />
+    <ClCompile Include="GameLogicNode.cpp" />
+    <ClCompile Include="GameNodeEditor.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectDefinition.cpp" />
+    <ClCompile Include="GameScope.cpp" />
+    <ClCompile Include="GameEnvironment.cpp" />
+    <ClCompile Include="GameString.cpp" />
+    <ClCompile Include="GameTrigger.cpp" />
+    <ClCompile Include="GameVar.cpp" />
+    <ClCompile Include="HashBufferJob.cpp" />
+    <ClCompile Include="HashUtil.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Job.cpp" />
+    <ClCompile Include="JobManager.cpp" />
+    <ClCompile Include="MageGame.cpp" />
+    <ClCompile Include="MageAppBase.cpp" />
+    <ClCompile Include="InitTerm.cpp" />
+    <ClCompile Include="MageLib.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MageMemory.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapObject.cpp" />
+    <ClCompile Include="Mutex_Win32.cpp" />
+    <ClCompile Include="ProfilingSystem.cpp" />
+    <ClCompile Include="PythonWrapper.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteAnimation.cpp" />
+    <ClCompile Include="SpriteDefinition.cpp" />
+    <ClCompile Include="SpriteManager.cpp" />
+    <ClCompile Include="StringUtil.cpp" />
+    <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="Thread_Win32.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TriggeredEvent.cpp" />
+    <ClCompile Include="XmlReader.cpp" />
+    <ClCompile Include="XmlUtil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Assertion.h" />
+    <ClInclude Include="BitHacks.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="CircularBuffer.h" />
+    <ClInclude Include="Clock.h" />
+    <ClInclude Include="Clock.hpp" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="CommandArgs.h" />
+    <ClInclude Include="Console.h" />
+    <ClInclude Include="DebugIO.h" />
+    <ClInclude Include="Definitionbase.h" />
+    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Entity.hpp" />
+    <ClInclude Include="EntityDefinition.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="FileLoadJob.h" />
+    <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="FrameRateControl.h" />
+    <ClInclude Include="FrameRateControl.hpp" />
+    <ClInclude Include="GameAction.h" />
+    <ClInclude Include="GameController.h" />
+    <ClInclude Include="GameExpression.h" />
+    <ClInclude Include="GameInfo.h" />
+    <ClInclude Include="GameEnvironment.h" />
+    <ClInclude Include="GameLogicNode.h" />
+    <ClInclude Include="GameNodeEditor.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectDefinition.h" />
+    <ClInclude Include="GameScope.h" />
+    <ClInclude Include="GameString.h" />
+    <ClInclude Include="GameTrigger.h" />
+    <ClInclude Include="GameVar.h" />
+    <ClInclude Include="GameVar.hpp" />
+    <ClInclude Include="HashBufferJob.h" />
+    <ClInclude Include="HashUtil.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Job.h" />
+    <ClInclude Include="JobManager.h" />
+    <ClInclude Include="MageGame.h" />
+    <ClInclude Include="MageAppBase.h" />
+    <ClInclude Include="InitTerm.h" />
+    <ClInclude Include="MageLib.h" />
+    <ClInclude Include="MageMemory.h" />
+    <ClInclude Include="MageTypes.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Map.hpp" />
+    <ClInclude Include="MapObject.h" />
+    <ClInclude Include="minizip\unzip.h" />
+    <ClInclude Include="minizip\zip.h" />
+    <ClInclude Include="Mutex.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ProfilingSystem.h" />
+    <ClInclude Include="PythonWrapper.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteAnimation.h" />
+    <ClInclude Include="SpriteDefinition.h" />
+    <ClInclude Include="SpriteManager.h" />
+    <ClInclude Include="stl_headers.h" />
+    <ClInclude Include="StringUtil.h" />
+    <ClInclude Include="Surface.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TriggeredEvent.h" />
+    <ClInclude Include="XmlReader.h" />
+    <ClInclude Include="XmlUtil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\base64\base64.vcxproj">
+      <Project>{143f3fcc-0e94-4f8d-ba52-9679c92d7ba1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MageMath\MageMath.vcxproj">
+      <Project>{cf2592d2-c89b-4cc5-884d-e97cc1dcbb20}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\tinyxml2\tinyxml2.vcxproj">
+      <Project>{5de7c7c1-197d-4117-a0ec-912df0e13fd6}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,62 @@
+<GameObject
+	name="EnemyShip01"
+  initialState="__global__,Damagable,Controllable"
+	physics="dynamic">
+
+  <Include filename="objects/SpaceShip.xml"/>
+
+  <Sprite animationSet="enemyShip01.anim" initialAnimName="Idle"/>
+
+  <Properties>
+    <Property name="enemy" type="int" value="0"/>
+    <Property name="EnemyType" type="string" value="player"/>
+    <Property name="InitialLife" type="string" value="1"/>
+  </Properties>
+
+  <Trigger name="FireInterval" type="Always" repeatTrue="true" logicTickDelay="60"/>
+  <Trigger name="TouchEndOfScreen" type="Collision" objectProperty="killEnemy"/>
+
+
+  <Action name="MoveLeft"     type="Motion" velocity="-15,0"/>
+  <Action name="MoveRight"    type="Motion" velocity="15,0"/>
+  <Action name="MoveUp"       type="Motion" velocity="0,-15"/>
+  <Action name="MoveDown"     type="Motion" velocity="0,15"/>
+  <Action name="Shoot"        type="AddObject" objectName="EnemyBullet" spawnOffset="-40,0"/>
+  <Action name="EnemyKilled"  type="SendEvent" eventName="EnemyKilled"/>
+  <Action name="PlayShootSFX" type="Sound" mode="PlayEnd" soundName="../data/sfx/cast2.wav"/>
+
+
+  <State name="Controllable">
+    <Controller name="cont">
+      <AddTrigger name="Always"/>
+
+      <AddAction name="MoveLeft"/>
+    </Controller>
+
+    <Controller name="cont">
+      <AddTrigger name="FireInterval"/>
+
+      <AddAction name="PlayShootSFX"/>
+      <AddAction name="Shoot"/>
+    </Controller>
+  </State>
+
+
+
+  <Controller name="death">
+    <AddTrigger name="TouchEndOfScreen"/>
+
+    <AddAction name="RemoveObject"/>
+  </Controller>
+  
+  
+  
+  <State name="Dead">
+    <Controller name="death2">
+      <AddTrigger name="Always"/>
+
+      <AddAction name="EnemyKilled"/>
+    </Controller>
+  </State>
+  
+</GameObject>

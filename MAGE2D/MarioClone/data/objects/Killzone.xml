@@ -1,0 +1,12 @@
+<GameObject
+	name="Killzone"
+	physics="none"
+	collision="ghost"
+	debugColor="#FFFF0000"
+	debugDraw="true">
+	
+	<Properties>
+		<Property name="Killzone" type="string" value=""/>
+	</Properties>
+	
+</GameObject>

@@ -1,0 +1,54 @@
+<!--
+Base object for bullets.
+
+You need to define the properties:
+    <Property name="EnemyType"   type="string" value="enemy_property_name"/>
+    <Property name="MoveLeft"    type="int" value="0=right or 1=left or anything else to disable"/>
+    <Property name="MoveDown"    type="int" value="0=up or 1=down or anything else to disable"/>
+-->
+<GameObject
+	abstract="true"
+  >
+  
+  <Trigger name="Always" type="Always" repeatTrue="true"/>
+  <Trigger name="TouchEndOfScreen" type="Collision" objectProperty="endOfScreen"/>
+  <Trigger name="TouchEnemy" type="Collision" objectProperty="@EnemyType"/>
+
+  <Action name="MoveLeft" type="Motion" move="-8,0"/>
+  <Action name="MoveRight" type="Motion" move="8,0"/>
+  <Action name="MoveDown" type="Motion" move="0,8"/>
+  <Action name="Die" type="RemoveObject"/>
+  <Action name="AddSmallExplode" type="AddObject" objectName="SmallExplosion"/>
+
+  <Controller name="moveCont" type="Expression" expr="@MoveLeft == 1">
+    <AddTrigger name="Always"/>
+
+    <AddAction name="MoveLeft"/>
+  </Controller>
+
+  <Controller name="moveCont" type="Expression" expr="@MoveLeft == 0">
+    <AddTrigger name="Always"/>
+
+    <AddAction name="MoveRight"/>
+  </Controller>
+
+  <Controller name="moveCont" type="Expression" expr="@MoveDown == 1">
+    <AddTrigger name="Always"/>
+
+    <AddAction name="MoveDown"/>
+  </Controller>
+
+  <Controller name="death" type="OR">
+    <AddTrigger name="TouchEndOfScreen"/>
+    <AddTrigger name="TouchEnemy"/>
+
+    <AddAction name="Die"/>
+  </Controller>
+
+  <Controller name="death2">
+    <AddTrigger name="TouchEnemy"/>
+
+    <AddAction name="AddSmallExplode"/>
+  </Controller>
+  
+</GameObject>

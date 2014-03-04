@@ -1,0 +1,12 @@
+<Entity name="Goomba">
+	<Sprite animationSet="goomba.anim">
+	</Sprite>
+	
+	<Collision physics="dynamic" collision="all" shape="box">
+		<Box offsetX="0" offsetY="0" width="16" height="16" />
+	</Collision>
+    
+    <Trigger type="collision" flags="player" count="1">
+        <SetAnimationState animationName="Death"/>
+    </Trigger>
+</Entity>

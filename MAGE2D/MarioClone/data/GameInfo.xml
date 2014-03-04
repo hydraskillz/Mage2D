@@ -1,0 +1,11 @@
+<GameInfo gameName="Super Mario Clone" startUpMap="maps/test_map.tmx">
+	<Properties>
+		<Property name="Score" type="int" value="0"/>
+		<Property name="Lives" type="int" value="2"/>
+		<Property name="Time" type="int" value="300"/>
+	</Properties>
+    
+    <!--
+    <AddOverlay name="marioHUD"/>
+    -->
+</GameInfo>

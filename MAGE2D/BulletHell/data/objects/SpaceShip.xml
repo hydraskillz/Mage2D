@@ -1,0 +1,71 @@
+<!--
+Base object for space ships.
+
+You need to define the properties:
+    <Property name="EnemyType"   type="string" value="enemy_property_name"/>
+    <Property name="InitialLife" type="string" value="initial_life_value"/>
+    
+States:
+   1: Initialize
+   2: Damagable
+  10: Dead
+-->
+<GameObject
+  abstract="true">
+
+  <Properties>
+    <Property name="Life" type="int" value="3"/>
+  </Properties>
+
+  <Trigger name="GetHit" type="Collision" objectProperty="@EnemyType"/>
+  <Trigger name="Once"   type="Always"/>
+  <Trigger name="Always" type="Always" repeatTrue="true"/>
+  
+  <Action name="TakeDamage"        type="Property" propertyName="Life" value="-1" propertyManipulationMode="Add"/>
+  <Action name="RemoveObject"      type="RemoveObject"/>
+  <Action name="SetInitialLife"    type="Property" propertyName="Life" value="@InitialLife" propertyManipulationMode="Assign"/>
+  <Action name="AddExplosion"      type="AddObject" objectName="Explosion01" spawnOffset="0,-32"/>
+  <Action name="GotoDeathState"    type="State" operation="Set" state="Dead"/>
+
+  <!-- Initialize -->
+  <Controller name="InitCont">
+    <AddTrigger name="Once"/>
+
+    <AddAction name="SetInitialLife"/>
+  </Controller>
+  <!-- /Initialize -->
+  
+  
+
+  
+  <!-- Damagable -->
+  <State name="Damagable">
+    <Controller name="GetHitCont">
+      <AddTrigger name="GetHit"/>
+
+      <AddAction name="TakeDamage"/>
+    </Controller>
+
+    <Controller name="DeathCont" type="Expression" expr="@Life == 0">
+      <AddTrigger name="GetHit"/>
+
+      <AddAction name="GotoDeathState"/>
+    </Controller>
+  </State>
+  <!-- /Damagable -->
+  
+  
+  
+  
+  <!-- Death -->
+  <State name="Dead">
+    <Controller name="DeathCont2">
+      <AddTrigger name="Always"/>
+
+      <AddAction name="AddExplosion"/>
+      <AddAction name="RemoveObject"/>
+    </Controller>
+  </State>
+  <!-- /Death -->
+  
+</GameObject>

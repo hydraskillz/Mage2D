@@ -1,0 +1,61 @@
+<GameObject
+	name="EnemyShip02"
+  initialState="__global__,Damagable,Controllable"
+	physics="dynamic">
+
+  <Include filename="objects/SpaceShip.xml"/>
+
+  <Sprite animationSet="enemyShip02.anim" initialAnimName="Idle"/>
+
+  <Properties>
+    <Property name="enemy" type="int" value="0"/>
+    <Property name="EnemyType" type="string" value="player"/>
+    <Property name="InitialLife" type="string" value="1"/>
+  </Properties>
+
+  <Trigger name="FireInterval" type="Always" repeatTrue="true" logicTickDelay="120"/>
+  <Trigger name="TouchEndOfScreen" type="Collision" objectProperty="killEnemy"/>
+
+
+  <Action name="MoveLeft"     type="Motion" velocity="-15,0"/>
+  <Action name="MoveRight"    type="Motion" velocity="15,0"/>
+  <Action name="MoveUp"       type="Motion" velocity="0,-15"/>
+  <Action name="MoveDown"     type="Motion" velocity="0,15"/>
+  <Action name="Shoot"        type="AddObject" objectName="EnemyBomb" spawnOffset="0,20"/>
+  <Action name="EnemyKilled"  type="SendEvent" eventName="EnemyKilled"/>
+
+
+  <State name="Controllable">
+    <Controller name="cont">
+      <AddTrigger name="Always"/>
+
+      <AddAction name="MoveLeft"/>
+    </Controller>
+
+    <Controller name="cont">
+      <AddTrigger name="FireInterval"/>
+
+      <AddAction name="Shoot"/>
+    </Controller>
+  </State>
+  
+  
+  
+  <Controller name="death">
+    <AddTrigger name="TouchEndOfScreen"/>
+
+    <AddAction name="RemoveObject"/>
+  </Controller>
+  
+    
+    
+
+  <State name="Dead">
+    <Controller name="death2">
+      <AddTrigger name="Always"/>
+
+      <AddAction name="EnemyKilled"/>
+    </Controller>
+  </State>
+  
+</GameObject>

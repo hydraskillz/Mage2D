@@ -1,0 +1,114 @@
+<GameObject
+	name="Goomba"
+	initialState="1"
+	physics="dynamic">
+	
+	<Sprite animationSet="goomba.anim"/>
+	<!--
+	<Text text="GoombaState = @enemy" position="500,50"/>
+	-->
+	
+	<Properties>
+		<Property name="Hazard" type="int" value="0"/>
+	</Properties>
+
+  <Trigger name="Init" type="Always"/>
+  <Action name="AddHitbox" type="AddObject" objectName="EnemyHitbox" attach="true" spawnOffset="-1,-1"/>
+
+  <Controller name="InitCont">
+    <AddTrigger name="Init"/>
+
+    <AddAction name="AddHitbox"/>
+  </Controller>
+
+	<Trigger
+		name="Always"
+		type="Always"
+		repeatTrue="true"
+		logicTickDelay="0"
+		/>
+	
+	<Trigger
+		name="PathEndTriggerLeft"
+		type="Collision"
+		objectProperty="PathNodeLeft"/>
+		
+	<Trigger
+		name="PathEndTriggerRight"
+		type="Collision"
+		objectProperty="PathNodeRight"/>
+		
+	<Action
+		name="MoveRight"
+		type="Motion"
+		move="0.5,0"/>
+		
+	<Action
+		name="MoveLeft"
+		type="Motion"
+		move="-0.5,0"/>
+		
+	<Action
+		name="GotoMoveRightState"
+		type="State"
+		operation="Set"
+		state="2"/>
+		
+	<Action
+		name="GotoMoveLeftState"
+		type="State"
+		operation="Set"
+		state="1"/>
+		
+	<Action
+		name="SetStateProp0"
+		type="Property"
+		propertyName="Hazard"
+		value="1"
+		propertyManipulationMode="Assign"/>
+	<Action
+		name="SetStateProp1"
+		type="Property"
+		propertyName="Hazard"
+		value="2"
+		propertyManipulationMode="Assign"/>
+		
+	<Controller
+		name="MoveLeftCont"
+		type="AND"
+		state="1">
+		<AddTrigger name="Always"/>
+		
+		<AddAction name="MoveLeft"/>
+	</Controller>
+		
+	<Controller
+		name="MoveLeftStateTriggerCont"
+		type="AND"
+		state="1">
+		<AddTrigger name="PathEndTriggerLeft"/>
+		
+		<AddAction name="SetStateProp1"/>
+		<AddAction name="GotoMoveRightState"/>
+	</Controller>
+	
+	<Controller
+		name="MoveRightCont"
+		type="AND"
+		state="2">
+		<AddTrigger name="Always"/>
+		
+		<AddAction name="MoveRight"/>
+	</Controller>
+		
+	<Controller
+		name="MoveRightStateTriggerCont"
+		type="AND"
+		state="2">
+		<AddTrigger name="PathEndTriggerRight"/>
+		
+		<AddAction name="SetStateProp0"/>
+		<AddAction name="GotoMoveLeftState"/>
+	</Controller>
+	
+</GameObject>

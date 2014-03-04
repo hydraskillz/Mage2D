@@ -1,0 +1,37 @@
+<!--
+	Spawns a GameObject when triggered.
+	@Params:
+		TriggerOn = Message to trigger on.
+		Spawn     = Name of object to spawn.
+-- --------------------------------------- -->
+<GameObject
+	name="Spawn"
+	physics="none"
+	collision="none"
+	debugColor="#FFAA00FF"
+	debugDraw="true">
+	
+	<Properties>
+		<Property name="TriggerOn" type="string" value=""/>
+		<Property name="Spawn"     type="string" value=""/>
+	</Properties>
+	
+	<Trigger
+		name="TriggerOn"
+		type="Event"
+		eventName="@TriggerOn"/>
+		
+	<Action
+		name="Spawn"
+		type="AddObject"
+		objectName="@Spawn"/>
+		
+	<Controller
+		name="SpawnerController"
+		type="AND">
+		<AddTrigger name="TriggerOn"/>
+
+		<AddAction name="Spawn"/>
+	</Controller>
+	
+</GameObject>

@@ -1,0 +1,12 @@
+<GameObject
+	name="Floor"
+	physics="none"
+	collision="ghost"
+	debugColor="#FF00AA00"
+	debugDraw="true">
+	
+	<Properties>
+		<Property name="Floor" type="string" value=""/>
+	</Properties>
+	
+</GameObject>

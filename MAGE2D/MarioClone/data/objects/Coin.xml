@@ -1,0 +1,30 @@
+<GameObject
+	name="Coin"
+	initialState="1"
+	physics="dynamic"
+	collision="all">
+	
+	<Sprite animationSet="coin.anim"/>
+	
+	<Properties>
+		<Property name="coin" type="int" value="0"/>
+	</Properties>
+	
+	<!-- Coin pickup -->
+  <Action name="CoinSFX" type="Sound" mode="PlayEnd" soundName="../data/sfx/smb_coin.wav"/>
+  <Action name="CoinDestroy" type="RemoveObject"/>
+  <Action name="NotifyCoinGet" type="SendEvent" eventName="CoinGet"/>
+  
+	<Trigger name="CoinPickup" type="Collision" objectProperty="player"/>
+	
+	<Controller name="PickedUpCont">
+		<AddTrigger name="CoinPickup"/>
+
+    <AddAction name="CoinSFX"/>
+    <AddAction name="NotifyCoinGet"/>
+		<AddAction name="CoinDestroy"/>
+	</Controller>
+	<!-- -->
+
+	
+</GameObject>

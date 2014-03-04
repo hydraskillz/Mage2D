@@ -1,0 +1,26 @@
+<GameObject
+	name="MainMenu"
+	physics="none">
+
+  <Sprite animationSet="title.anim" position="250,150" screenSpace="true"/>
+  <Text text="PRESS SPACE" position="330,300"/>
+  
+  <Trigger name="PressStart" type="Event" eventName="Shoot"/>
+  <Trigger name="Once" type="Always" logicTickDelay="10"/>
+
+  <Action name="LoadLevelOne" type="LoadLevel" levelName="maps/level-1.tmx"/>
+  <Action name="MenuMusic" type="Sound" loops="-1" mode="PlayMusic" soundName="../data/sfx/Serious_Sam_3_BFE_-_Boss_Music_1.mp3" />
+  <Action name="StopMenuMusic" type="Sound" mode="StopMusic" soundName="../data/sfx/Serious_Sam_3_BFE_-_Boss_Music_1.mp3" />
+
+  <Controller name="cont">
+    <AddTrigger name="Once"/>
+
+    <AddAction name="MenuMusic"/>
+  </Controller>
+
+  <Controller name="cont">
+    <AddTrigger name="PressStart"/>
+
+    <AddAction name="LoadLevelOne"/>
+  </Controller>
+</GameObject>

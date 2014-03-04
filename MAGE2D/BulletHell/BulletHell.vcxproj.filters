@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\data">
+      <UniqueIdentifier>{1730db67-9b72-4fd9-87fa-5219d1c5c2ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\data\objects">
+      <UniqueIdentifier>{2fbb8337-f40f-4e47-8faf-48be9c9b219b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\data\scripts">
+      <UniqueIdentifier>{6b004ddc-6a61-4f9b-ab8f-54f7881ad94f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BulletHell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BulletHell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\GameInfo.xml">
+      <Filter>Resource Files\data</Filter>
+    </None>
+    <None Include="data\objects\Player.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\InputBindings.xml">
+      <Filter>Resource Files\data</Filter>
+    </None>
+    <None Include="data\objects\Bullet.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\PlayerBullet.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\EnemyBullet.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\SpaceShip.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\Explosion01.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\Level1_Logic.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\EnemyShip01.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\SpaceHUD.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\MainMenu.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\GameOver.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\EnemyShip02.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\EnemyBomb.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\Explosion.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+    <None Include="data\objects\Explosion02.xml">
+      <Filter>Resource Files\data\objects</Filter>
+    </None>
+  </ItemGroup>
+</Project>

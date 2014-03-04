@@ -1,0 +1,12 @@
+<GameObject
+	name="PathNode"
+	physics="none"
+	collision="ghost"
+	debugColor="#FFFFAAAA"
+	debugDraw="true">
+	
+	<Properties>
+		<Property name="PathNode" type="string" value=""/>
+	</Properties>
+	
+</GameObject>

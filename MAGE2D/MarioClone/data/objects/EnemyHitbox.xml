@@ -1,0 +1,13 @@
+<GameObject
+	name="EnemyHitbox"
+	physics="none"
+	collision="ghost"
+	debugColor="#FFAA0055"
+	debugDraw="true"
+	collisionBox="18,4">
+	
+	<Properties>
+		<Property name="EnemyHitbox" type="string" value=""/>
+	</Properties>
+	
+</GameObject>

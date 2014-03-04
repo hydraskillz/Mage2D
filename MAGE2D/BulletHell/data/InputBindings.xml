@@ -1,0 +1,18 @@
+<!-- Binding of keys to events -->
+<Input>
+  <Binding name="MoveLeft" key="LEFT_ARROW" state="JUST_DOWN | DOWN" />
+	<Binding name="StopMoveLeft" key="LEFT_ARROW" state="JUST_UP" />
+  
+	<Binding name="MoveRight" key="RIGHT_ARROW" state="JUST_DOWN | DOWN" />
+	<Binding name="StopMoveRight" key="RIGHT_ARROW" state="JUST_UP" />
+
+  <Binding name="MoveUp" key="UP_ARROW" state="JUST_DOWN | DOWN" />
+  <Binding name="StopMoveUp" key="UP_ARROW" state="JUST_UP" />
+
+  <Binding name="MoveDown" key="DOWN_ARROW" state="JUST_DOWN | DOWN" />
+  <Binding name="StopMoveDown" key="DOWN_ARROW" state="JUST_UP" />
+
+  <Binding name="Shoot" key="SPACEBAR" state="JUST_DOWN | DOWN"/>
+  
+	<Binding name="ResetLevel" key="F6" state="JUST_DOWN" />
+</Input>

@@ -1,0 +1,14 @@
+<Entity name="CoinBlock">
+	<Sprite animationSet="coin_block.anim">
+	</Sprite>
+	
+	<Collision physics="static" collision="all" shape="box">
+		<Box offsetX="0" offsetY="0" width="16" height="16" />
+	</Collision>
+    
+    <Trigger type="collision" flags="player" count="1">
+        <SetAnimationState animationName="Death"/>
+        <Spawn name="Coin" animationState="Death"/>
+    </Trigger>
+    
+</Entity>

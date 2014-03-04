@@ -1,0 +1,58 @@
+<Entity name="Mario" flags="player">
+
+	<Sprite animationSet="mario.anim">
+	</Sprite>
+	
+	<Collision physics="dynamic" collision="all" shape="box">
+		<Box offsetX="0" offsetY="0" width="16" height="16" />
+	</Collision>
+	
+    <Trigger type="event" name="Use">
+        <OnUse/>
+    </Trigger>
+	
+	<Trigger type="event" name="MoveRight">
+		<ApplyImpulse force="10,0" />
+		<SetAnimationState animationName="WalkR"/>
+	</Trigger>
+    
+    <Trigger type="event" name="MoveLeft">
+		<ApplyImpulse force="-10,0" />
+		<SetAnimationState animationName="WalkL"/>
+	</Trigger>
+	
+	<Trigger type="event" name="Jump">
+		<ApplyImpulse force="0,-50" />
+		<SetAnimationState animationName="Jump"/>
+	</Trigger>
+	
+	<Trigger type="event" name="JumpHold">
+		<ApplyImpulse force="0,-50" />
+	</Trigger>
+	
+	<Trigger type="event" name="JumpRelease">
+	</Trigger>
+	
+	
+	
+	
+	<Properties>
+		<Property name="BOUNCE_FORCE" type="Vec2" value="0,5" />
+	</Properties>
+	<!-- void Touch( Entity Other ) -->
+	<OnEvent name="Touch" ifExpr="">
+		<!-- Other is a Goomba -->
+		<Condition expr="Other.Name == Goomba">
+			<!-- We are above the Goomba -->
+			<Condition expr="Self.Location.Y >= Other.Location.Y">
+				<!-- Kill the Goomba -->
+				<FireEvent name="KillGoomba">
+					<EventParam name="Entity" type="Entity" value="Other"/>
+				</FireEvent>
+				<!-- Bounce up -->
+				<Expression expr="Self.ApplyImpulse( Self.Properties.BOUNCE_FORCE )" />
+			</Condition>
+		</Condition>
+	</OnEvent>
+	
+</Entity>

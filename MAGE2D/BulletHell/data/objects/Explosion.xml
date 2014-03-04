@@ -1,0 +1,22 @@
+<GameObject
+	abstract="true">
+  
+  <Trigger name="Once" type="Always"/>
+  <Trigger name="AnimComplete" type="Animation" mode="Complete" animName="Explode"/>
+
+  <Action name="RemoveObject" type="RemoveObject"/>
+  <Action name="PlayExplodeSFX" type="Sound" mode="PlayEnd" soundName="../data/sfx/explosion.wav"/>
+
+  <Controller name="cont">
+    <AddTrigger name="Once"/>
+
+    <AddAction name="PlayExplodeSFX"/>
+  </Controller>
+
+  <Controller name="cont">
+    <AddTrigger name="AnimComplete"/>
+
+    <AddAction name="RemoveObject"/>
+  </Controller>
+
+</GameObject>

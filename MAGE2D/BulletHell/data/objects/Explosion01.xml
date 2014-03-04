@@ -1,0 +1,9 @@
+<GameObject
+	name="Explosion01"
+	physics="none">
+
+  <Include filename="objects/Explosion.xml"/>
+  
+  <Sprite animationSet="explosion01.anim" initialAnimName="Explode"/>
+
+</GameObject>

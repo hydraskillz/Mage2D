@@ -1,0 +1,41 @@
+<GameObject
+	name="Level1_Logic"
+	physics="none">
+
+  <Trigger name="Always" type="Always"/>
+  <Trigger name="SpawnDelay1" type="Always" repeatTrue="true" logicTickDelay="150"/>
+  <Trigger name="SpawnDelay2" type="Always" repeatTrue="true" logicTickDelay="250"/>
+  <Trigger name="SpawnDelay3" type="Always" repeatTrue="true" logicTickDelay="300"/>
+
+  <Action name="SpawnEnemy1" type="SendEvent" eventName="SpawnEnemyShip1"/>
+  <Action name="SpawnEnemy2" type="SendEvent" eventName="SpawnEnemyShip2"/>
+  <Action name="SpawnEnemy3" type="SendEvent" eventName="SpawnEnemyShip3"/>
+  
+  <Action name="SpawnPlayer" type="SendEvent" eventName="SpawnPlayer"/>
+
+  <Controller name="cont">
+    <AddTrigger name="SpawnDelay1"/>
+
+    <AddAction name="SpawnEnemy1"/>
+  </Controller>
+
+  <Controller name="cont">
+    <AddTrigger name="SpawnDelay2"/>
+
+    <AddAction name="SpawnEnemy2"/>
+  </Controller>
+
+  <Controller name="cont">
+    <AddTrigger name="SpawnDelay3"/>
+
+    <AddAction name="SpawnEnemy3"/>
+  </Controller>
+
+  <Controller name="cont">
+    <AddTrigger name="Always"/>
+
+    <AddAction name="SpawnPlayer"/>
+  </Controller>
+
+
+</GameObject>

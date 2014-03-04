@@ -1,0 +1,19 @@
+<!-- Platform specific key bindings -->
+<KeyCodes>
+	<Key name="RIGHT_ARROW" value="275" />
+	<Key name="LEFT_ARROW" value="276" />
+	<Key name="UP_ARROW" value="273" />
+	<Key name="DOWN_ARROW" value="274" />
+	
+	<Key name="SPACEBAR" value="32"/>
+	
+	<Key name="Z" value="122" />
+	<Key name="X" value="120" />
+	
+	<Key name="F1" value="282" />
+	<Key name="F2" value="283" />
+	<Key name="F3" value="284" />
+	<Key name="F4" value="285" />
+	<Key name="F6" value="287" />
+	
+</KeyCodes>

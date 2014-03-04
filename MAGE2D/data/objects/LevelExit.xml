@@ -1,0 +1,36 @@
+<!--
+	Loads a new level when the player collides
+	with it.
+	@Params:
+		TargetLevel = Level to load.
+-- --------------------------------------- -->
+<GameObject
+	name="LevelExit"
+	physics="none"
+	collision="ghost"
+	debugColor="#FFFFAAFF"
+	debugDraw="true">
+	
+	<Properties>
+		<Property name="TargetLevel" type="string" value=""/>
+	</Properties>
+	
+	<Trigger
+		name="CollisionTrigger"
+		type="Collision"
+		objectProperty="player"/>
+		
+	<Action
+		name="LoadLevel"
+		type="LoadLevel"
+		levelName="@TargetLevel"/>
+		
+	<Controller
+		name="SpawnerController"
+		type="AND">
+		<AddTrigger name="CollisionTrigger"/>
+
+		<AddAction name="LoadLevel"/>
+	</Controller>
+	
+</GameObject>

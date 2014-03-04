@@ -1,0 +1,21 @@
+<GameObject
+	name="CoinBlock"
+	physics="static"
+	collision="all">
+	
+	<Sprite animationSet="coin_block.anim"/>
+
+  <Trigger name="TouchPlayer" type="Collision" objectProperty="player"/>
+  <Action name="PlayDeathAnim" type="Animation" animName="Death"/>
+  <Action name="SetStateDead" type="State" operation="Set" state="2"/>
+  <Action name="SpawnCoin" type="AddObject" objectName="Coin"/>
+
+  <Controller name="GetHitCont">
+    <AddTrigger name="TouchPlayer"/>
+
+    <AddAction name="PlayDeathAnim"/>
+    <AddAction name="SetStateDead"/>
+    <AddAction name="SpawnCoin"/>
+  </Controller>
+	  
+</GameObject>

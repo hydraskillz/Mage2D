@@ -1,0 +1,104 @@
+<GameObject
+	name="player"
+	initialState="1">
+	
+	<!--
+		You can define as many Sprites as you want per object.
+		When an object goes invisible, so will all of its Sprites.
+		(req) animationSet : The anim file to use for this Sprite.
+		(opt) screenSpace  : Use screen co-ords for position. Default is false (world space position).
+		(opt) position     : Offset from object position. Default is (0,0)
+	-->
+	<Sprite animationSet="goomba.anim" screenSpace="true" position="20,20"/>
+	<Sprite animationSet="coin.anim" screenSpace="true" position="36,20"/>
+	
+	<Text text="Test text: TestProp = @TestProp"/>
+	<Text text="int_prop = @int_prop" position="0,30"/>
+	
+	<!--
+		You can as many properties as you want per object.
+		Property names must be unique per object.
+		(req) name  : Name of the property. This will become ObjectName.PropName. You do not need to include ObjectName. when referencing the property in the object file it was created in.
+		(req) type  : Type of value. Use int, float, or string.
+		(req) value : Initial value of property.
+	-->
+	<Properties>
+		<Property name="int_prop" type="int" value="5"/>
+		<Property name="float_prop" type="float" value="3.14"/>
+		<Property name="string_prop" type="string" value="String Property"/>
+		
+		<Property name="TestProp" type="string" value="hello"/>
+	</Properties>
+
+	<!--
+		You can as many triggers as you want per object.
+		The attributes per trigger vary based on type.
+		(req) name : Name of trigger. Same rules as property names, but ObjectName::TriggerName instead of .
+		(req) type : Type of trigger. See Types below.
+		Types:
+			- Always - Trigger is always true.
+			- Event  - Trigger is true when the event is recieved.
+			(req) eventName : Name of event to listen for.
+	-->
+	<Trigger
+		name="InitSensor"
+		type="Always"/>
+		
+	<Trigger
+		name="OnMapLoadedTrigger"
+		type="Event"
+		eventName="OnMapLoaded"/>
+		
+	<!-- Not loaded since duplicate. A warning will be triggered.
+	<Trigger
+		name="InitSensor"
+		type="Always" />
+	-->
+		
+	<Trigger
+		name="TruePulseSensor"
+		type="Always"
+		repeatTrue="true"
+		logicTickDelay="60"
+		/>
+	
+	<Action
+		name="Move"
+		type="Motion"
+		translation="10,10"/>
+		
+	<Action
+		name="PropTest"
+		type="Property"
+		propertyName="TestProp"
+		value=" world"
+		propertyManipulationMode="Add"
+		/>
+		
+	<Action
+		name="AddIntProp"
+		type="Property"
+		propertyName="int_prop"
+		value="1"
+		propertyManipulationMode="Add"
+	/>
+	
+	<Controller
+		name="cont"
+		type="AND"
+		state="1">
+		<AddTrigger name="OnMapLoadedTrigger"/>
+
+		<AddAction name="PropTest"/>
+	</Controller>
+	
+	<Controller
+		name="cont"
+		type="AND"
+		state="1">
+		<AddTrigger name="TruePulseSensor"/>
+
+		<AddAction name="AddIntProp"/>
+	</Controller>
+	
+</GameObject>

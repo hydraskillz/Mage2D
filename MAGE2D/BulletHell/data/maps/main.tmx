@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="32" tileheight="32">
+ <objectgroup name="Object Layer 1" width="40" height="40">
+  <object type="MainMenu" x="352" y="128" width="32" height="32"/>
+ </objectgroup>
+ <imagelayer name="space" width="40" height="40">
+  <image source="../backgrounds/farback.gif"/>
+  <properties>
+   <property name="ScrollSpeed" value="-2,0"/>
+  </properties>
+ </imagelayer>
+</map>

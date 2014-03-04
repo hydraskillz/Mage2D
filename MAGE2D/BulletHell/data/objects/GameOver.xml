@@ -1,0 +1,8 @@
+<GameObject
+	name="GameOver"
+	physics="none">
+
+  <Text text="GAME OVER" position="400,200"/>
+  <Text text="Press F5 to restart" position="360,215"/>
+  
+</GameObject>

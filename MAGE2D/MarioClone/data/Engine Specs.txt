@@ -1,0 +1,65 @@
+GameInfo.xml
+	Contains info about the game.
+	This file is loaded on the start of a game session and persists throughout the session.
+	<GameInfo gameName="GameName" startUpMap="NameOfLevelToLoadOnStart">
+		Can have a property block
+		<Properties>
+			<Property name="" type="" value=""/>
+			 - name		// This will be the handle used to access this property.
+			 - type		// (Optional) the type of the property. If excluded, will default to String.
+			 - value	// The value to be stored.
+		</Properties>
+		
+		GameInfo is a global name and can be accessed across all data files.
+		
+		Accessing/Setting a property:
+			GameInfo['PropertyName'] = 20
+			
+WorldInfo.world.xml
+	Info for different types of game worlds. Each level specifies which world info it uses.
+	WorldInfo is created on level load and persists for the durration of the level.
+	<WorldInfo gravity="x,y">
+		Can have property block
+
+Engine Core Types
+	Entity - MyEntity.entity.xml
+		This class describes an object in the level that can be drawn (via Sprite) and
+		have collision/physics.
+		
+		Tags:
+		 - <Entity r_name="name" o_maxHealth="100"/>
+		 - <Sprite r_animationSet="name" />
+		 - <Collision r_shape="box | empty" r_collision="all | none" o_physics="none | static | dynamic" />
+		   - <Box o_offsetX="" o_offset="" r_width="" r_height="" />
+		 - <Trigger r_type="event" o_if="expr" />
+		 - <Event r_name="name" />
+		 - <ApplyImpulse r_force="x,y" />
+		
+		Entities recive the following events:
+		 - OnSpawn  // When Entity is in the level
+		 - OnTouch  // When another Entity is colliding with this Entity (this is only called for Entities with Entity-to-Entity collision enabled)
+		 - OnDeath  // When this Entity is about to be removed from the level
+		 
+		Attributes:
+		 - Health	// Current health of entity. if <= entity is killed
+		 - Age		// Time since the entity was spawned
+		 
+		 Collision can be specified with the <CollisionType> tag
+		 <CollisionType primitive="" flags="" type="">
+		  - primitive	// Basic shaped used for bounds. Valid params: Box, Circle
+		  - flags		// How the collision is handled.
+						 - All: World and Entity collision
+						 - WorldOnly: No collision with entities.
+						 - EntityOnly: No collision with world.
+						 - Ghost: Fire events on Entity collision, but do not resolve collision.
+						 - None: No collision.
+		 - type			// The type of collision to use.
+						 - Static: Entity cannot move.
+						 - Dynamic: Entity can move and be move by other Entities.
+						 - Rigid: Like dynamic but with rotation [NOT SUPPORTED YET]
+						 
+		To assign a Sprite to an Entity use the <Sprite> tag
+		<Sprite anim="NameOfAnimFile"/>
+		If an Entity doesn't have a Sprite it can still be visualized using collision debug view.
+		If an Entity doesn't have collision either, it won't be able to be visualized.
+		

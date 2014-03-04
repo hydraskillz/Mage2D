@@ -1,0 +1,94 @@
+<GameObject
+	name="Player"
+  initialState="__global__,Damagable,Controllable"
+	physics="dynamic"
+  debugDraw="false">
+
+  <Include filename="objects/SpaceShip.xml"/>
+  
+  <Sprite animationSet="playerShip.anim" initialAnimName="Idle"/>
+
+  <Text text="HP: @Life / @InitialLife" position="80,10"/>
+
+  <Properties>
+    <Property name="player" type="int" value="0"/>
+    <Property name="EnemyType" type="string" value="enemy"/>
+    <Property name="InitialLife" type="string" value="3"/>
+  </Properties>
+
+  <Trigger name="KeyLeft"  type="Event" eventName="MoveLeft"/>
+  <Trigger name="KeyRight" type="Event" eventName="MoveRight"/>
+  <Trigger name="KeyUp"    type="Event" eventName="MoveUp"/>
+  <Trigger name="KeyDown"  type="Event" eventName="MoveDown"/>
+  <Trigger name="KeyShoot" type="Event" eventName="Shoot"/>
+  <Trigger name="ShootDelay" type="Always" repeatTrue="true" logicTickDelay="5"/>
+
+  <Action name="MoveLeft"         type="Motion" velocity="-40,0"/>
+  <Action name="MoveRight"        type="Motion" velocity="40,0"/>
+  <Action name="MoveUp"           type="Motion" velocity="0,-40"/>
+  <Action name="MoveDown"         type="Motion" velocity="0,40"/>
+  <Action name="Shoot"            type="AddObject" objectName="PlayerBullet" spawnOffset="64,0"/>
+  <Action name="PlayerDied"       type="SendEvent" eventName="PlayerDied"/>"
+  <Action name="PlayShootSFX"     type="Sound" mode="PlayEnd" soundName="../data/sfx/cast2.wav"/>
+  <Action name="PlayGetHitSFX"    type="Sound" mode="PlayEnd" soundName="../data/sfx/gethit.wav"/>
+
+  
+
+  
+  <State name="Controllable">
+    <Controller name="UserCont">
+      <AddTrigger name="KeyLeft"/>
+
+      <AddAction name="MoveLeft"/>
+    </Controller>
+
+    <Controller name="UserCont">
+      <AddTrigger name="KeyRight"/>
+
+      <AddAction name="MoveRight"/>
+    </Controller>
+
+    <Controller name="UserCont">
+      <AddTrigger name="KeyUp"/>
+
+      <AddAction name="MoveUp"/>
+    </Controller>
+
+    <Controller name="UserCont">
+      <AddTrigger name="KeyDown"/>
+
+      <AddAction name="MoveDown"/>
+    </Controller>
+
+    <Controller name="UserCont">
+      <AddTrigger name="KeyShoot"/>
+      <AddTrigger name="ShootDelay"/>
+
+      <AddAction name="Shoot"/>
+      <AddAction name="PlayShootSFX"/>
+    </Controller>
+  </State>
+
+  
+  
+  
+  <State name="Dead">
+    <Controller name="DeathCont2">
+      <AddTrigger name="Always"/>
+
+      <AddAction name="PlayerDied"/>
+    </Controller>
+  </State>
+
+  
+  
+  
+  <State name="Damagable">
+    <Controller name="GetHitCont">
+      <AddTrigger name="GetHit"/>
+
+      <AddAction name="PlayGetHitSFX"/>
+    </Controller>
+  </State>
+  
+</GameObject>

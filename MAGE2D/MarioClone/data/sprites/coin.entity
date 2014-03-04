@@ -1,0 +1,17 @@
+<Entity name="Coin">
+	<Sprite animationSet="coin.anim">
+        <AnimationCallback animationName="Death" onComplete="OnDeathComplete"/>
+	</Sprite>
+	
+	<Collision physics="static" collision="ghost" shape="box">
+		<Box offsetX="0" offsetY="0" width="16" height="16" />
+	</Collision>
+    
+    <Trigger type="collision" flags="player" count="1">
+        <SetAnimationState animationName="Death"/>
+    </Trigger>
+    
+    <Trigger type="event" name="OnDeathComplete">
+        <Kill/>
+    </Trigger>
+</Entity>

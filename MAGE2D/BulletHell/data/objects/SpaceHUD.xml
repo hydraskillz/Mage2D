@@ -1,0 +1,45 @@
+<GameObject
+	name="SpaceHUD"
+	physics="none">
+
+  <Text text="Lives: @Lives" position="10,10"/>
+  <Text text="Score: @Score" position="10,35"/>
+  
+  <Properties>
+    <Property name="Score" type="int" value="0"/>
+    <Property name="Lives" type="int" value="3"/>
+  </Properties>
+
+  <Trigger name="EnemyKilled" type="Event" eventName="EnemyKilled"/>
+  <Trigger name="PlayerDied"  type="Event" eventName="PlayerDied"/>
+  <Trigger name="GameOver"    type="Property" property="Lives" value="1" compareMode="Equal" repeatTrue="true"/>
+  <Trigger name="HasLives"    type="Property" property="Lives" value="1" compareMode="NotEqual" repeatTrue="true"/>
+
+  <Action name="AddScore" type="Property" propertyName="Score" value="100" propertyManipulationMode="Add"/>
+  <Action name="LoseLive" type="Property" propertyName="Lives" value="-1" propertyManipulationMode="Add"/>
+  <Action name="SpawnPlayer" type="SendEvent" eventName="SpawnPlayer"/>
+  <Action name="AddGameOver" type="AddObject" objectName="GameOver"/>
+
+  <Controller name="ScoreCont">
+    <AddTrigger name="EnemyKilled"/>
+
+    <AddAction name="AddScore"/>
+  </Controller>
+
+  <Controller name="ScoreCont">
+    <AddTrigger name="PlayerDied"/>
+    <AddTrigger name="HasLives"/>
+
+    <AddAction name="LoseLive"/>
+    <AddAction name="SpawnPlayer"/>
+  </Controller>
+
+  <Controller name="ScoreCont">
+    <AddTrigger name="PlayerDied"/>
+    <AddTrigger name="GameOver"/>
+
+    <AddAction name="LoseLive"/>
+    <AddAction name="AddGameOver"/>
+  </Controller>
+  
+</GameObject>

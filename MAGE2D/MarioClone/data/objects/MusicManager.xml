@@ -1,0 +1,23 @@
+<GameObject
+	name="MusicManager"
+	physics="none"
+	collision="none"
+	debugColor="#FFAAAA00"
+	debugDraw="true">
+
+  <Properties>
+    <Property name="Music" type="string" value=""/>
+  </Properties>
+
+  <Trigger name="Once" type="Always"/>
+  <Trigger name="OnLoaded" type="Event" eventName="OnMapLoaded"/>
+
+  <Action name="PlayMusic" type="Sound" mode="PlayMusic" soundName="@Music"/>
+		
+  <Controller name="MusicCont">
+    <AddTrigger name="OnLoaded"/>
+
+    <AddAction name="PlayMusic"/>
+  </Controller>
+
+</GameObject>

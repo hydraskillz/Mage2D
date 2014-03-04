@@ -1,0 +1,17 @@
+<GameObject
+	name="PlayerBullet"
+	physics="dynamic"
+  >
+
+  <Include filename="objects/Bullet.xml"/>
+
+  <Sprite animationSet="bullets.anim" initialAnimName="GreenR"/>
+
+  <Properties>
+    <Property name="player" type="int" value="0"/>
+    <Property name="MoveLeft" type="int" value="0"/>
+    <Property name="MoveDown" type="int" value="0"/>
+    <Property name="EnemyType" type="string" value="enemy"/>
+  </Properties>
+  
+</GameObject>

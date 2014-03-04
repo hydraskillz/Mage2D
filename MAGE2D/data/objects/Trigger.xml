@@ -1,0 +1,37 @@
+<!--
+	Send a message when triggered
+	@Params:
+		Property = Send message when object with this propery collides with us. (empty -> all objects)
+		Event    = Name of message to send.
+-- --------------------------------------- -->
+<GameObject
+	name="Trigger"
+	physics="none"
+	collision="ghost"
+	debugColor="#FFFFAA00"
+	debugDraw="true">
+	
+	<Properties>
+		<Property name="Property" type="string" value=""/>
+		<Property name="Event" type="string" value=""/>
+	</Properties>
+	
+	<Trigger
+		name="CollisionTrigger"
+		type="Collision"
+		objectProperty="@Property"/>
+		
+	<Action
+		name="SendTriggerEvent"
+		type="SendEvent"
+		eventName="@Event"/>
+		
+	<Controller
+		name="SpawnerController"
+		type="AND">
+		<AddTrigger name="CollisionTrigger"/>
+
+		<AddAction name="SendTriggerEvent"/>
+	</Controller>
+	
+</GameObject>

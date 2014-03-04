@@ -1,0 +1,10 @@
+<Overlay name="marioHUD">
+    <Text text="Test text"/>
+    <Text text="Test at 50 50" position="50,50"/>
+    <Text text="Test red at 50 80" position="50,80" color="#ffff0000"/>
+    <Text text="Hello" position="50,90"/>
+    
+    <Sprite animationSet="coin.anim"/>
+    <Sprite animationSet="coin.anim" position="5,30"/>
+    <Sprite animationSet="coin.anim" position="15,30"/>
+</Overlay>
